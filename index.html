@@ -68,4 +68,7 @@ function renderCart(){let items=document.getElementById('items');items.innerHTML
 function checkout(){if(cart.length===0)return alert('Carrello vuoto');let msg='Ciao, vorrei ordinare:%0A';cart.forEach(i=>msg+=`- ${i.name} (€${i.price})%0A`);msg+='Totale: €'+document.getElementById('total').innerText;window.open('https://wa.me/393511967816?text='+msg,'_blank');}
 </script>
 </body>
+<footer>
+    <p>&copy; 2026 SG Development Company. Tutti i diritti riservati.</p>
+</footer>  
 </html>
