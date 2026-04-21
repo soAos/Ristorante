@@ -68,11 +68,11 @@ function addItem(name,price){cart.push({name,price});renderCart();}
 function renderCart(){let items=document.getElementById('items');items.innerHTML='';let total=0;cart.forEach(i=>{total+=i.price;items.innerHTML+=`<div class="cart-item"><span>${i.name}</span><span>€${i.price}</span></div>`});document.getElementById('total').innerText=total;}
 function checkout(){if(cart.length===0)return alert('Carrello vuoto');let msg='Ciao, vorrei ordinare:%0A';cart.forEach(i=>msg+=`- ${i.name} (€${i.price})%0A`);msg+='Totale: €'+document.getElementById('total').innerText;window.open('https://wa.me/393511967816?text='+msg,'_blank');}
 </script>
-</body>
 <footer>
     <p>
         &copy; 2020-2026 SG Development - P.IVA 0123456789 - 
         Tutti i diritti riservati. Riproduzione vietata.
     </p>
 </footer>
+</body>
 </html>
