@@ -75,6 +75,7 @@ footer{background:#111;color:#fff;padding:25px;text-align:center}
 <div id="items"></div>
 <div class="total">Totale: €<span id="total">0</span></div>
 <button class="checkout" onclick="checkout()">Ordina su WhatsApp</button>
+<button class="checkout" style="background:#000;margin-top:10px" onclick="applePay()"> Paga con Apple Pay</button>
 </div>
 </div>
 </div>
@@ -83,6 +84,7 @@ let cart=[];
 function addItem(name,price){cart.push({name,price});renderCart();}
 function renderCart(){let items=document.getElementById('items');items.innerHTML='';let total=0;cart.forEach(i=>{total+=i.price;items.innerHTML+=`<div class="cart-item"><span>${i.name}</span><span>€${i.price}</span></div>`});document.getElementById('total').innerText=total;}
 function checkout(){if(cart.length===0)return alert('Carrello vuoto');let msg='Ciao, vorrei ordinare:%0A';cart.forEach(i=>msg+=`- ${i.name} (€${i.price})%0A`);msg+='Totale: €'+document.getElementById('total').innerText;window.open('https://wa.me/393511967816?text='+msg,'_blank');}
+function applePay(){alert('Apple Pay avviato. Collega un gateway reale come Stripe per pagamenti live.');}
 </script>
 <footer>
     <p>
