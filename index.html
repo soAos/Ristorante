@@ -84,8 +84,19 @@ let cart=[];
 function addItem(name,price){cart.push({name,price});renderCart();}
 function renderCart(){let items=document.getElementById('items');items.innerHTML='';let total=0;cart.forEach(i=>{total+=i.price;items.innerHTML+=`<div class="cart-item"><span>${i.name}</span><span>€${i.price}</span></div>`});document.getElementById('total').innerText=total;}
 function checkout(){if(cart.length===0)return alert('Carrello vuoto');let msg='Ciao, vorrei ordinare:%0A';cart.forEach(i=>msg+=`- ${i.name} (€${i.price})%0A`);msg+='Totale: €'+document.getElementById('total').innerText;window.open('https://wa.me/393511967816?text='+msg,'_blank');}
-function applePay(){alert('Apple Pay avviato. Collega un gateway reale come Stripe per pagamenti live.');}
-</script>
+async function applePay(){
+if(!window.PaymentRequest){alert('Apple Pay non supportato su questo dispositivo/browser');return;}
+let total=document.getElementById('total').innerText;
+if(total==0){alert('Carrello vuoto');return;}
+try{
+const methodData=[{supportedMethods:'https://apple.com/apple-pay',data:{version:3,merchantIdentifier:'merchant.com.kebabfriends.demo',merchantCapabilities:['supports3DS'],supportedNetworks:['visa','masterCard'],countryCode:'IT'}}];
+const details={total:{label:'Kebab Friends',amount:{currency:'EUR',value:String(total)}}};
+const request=new PaymentRequest(methodData,details);
+const response=await request.show();
+await response.complete('success');
+alert('Pagamento completato con successo');
+}catch(e){console.log(e);alert('Pagamento annullato o non disponibile');}
+}</script>
 <footer>
     <p>
         &copy; 2020-2026 SG Development - P.IVA 0123456789 - 
